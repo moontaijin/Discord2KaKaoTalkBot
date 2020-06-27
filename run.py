@@ -1,8 +1,11 @@
 import discord
 import asyncio
 import json
+import time
+"""
+discord.__version__ == 1.3.3
 
-
+"""
 client = discord.Client()
 token = ""  # 절대 이곳에 토큰을 적지 말고 다른 파일에서 읽어오는 형식으로 진행하기
 
@@ -23,6 +26,16 @@ async def on_message(message):
     if message.author.bot:
         return None  # 봇이 보낸 메세지는 무시합니다.
 
+    file_path = "./Question"
+    name = client.user.name
+    script = message.content
+    group = dict()
+
+    group['name'] = name
+    group['script'] = script
+
+    with open(file_path, 'w') as f:
+        json.dump(group, f, ensure_ascii=False)
 
 
 # client를 구동시킵니다.
